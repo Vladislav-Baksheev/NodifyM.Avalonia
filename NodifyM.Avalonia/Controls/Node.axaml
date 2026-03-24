@@ -1,6 +1,5 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:viewModelBase="clr-namespace:NodifyM.Avalonia.ViewModelBase"
 		xmlns:controls="clr-namespace:NodifyM.Avalonia.Controls"
 		xmlns:viewModelBase1="clr-namespace:NodifyM.Avalonia.ViewModelBase">
 	<Design.PreviewWith>
@@ -32,10 +31,6 @@
 		<Setter Property="BorderThickness" Value="2"></Setter>
 		<Setter Property="Location" x:DataType="viewModelBase1:NodeViewModelBase"
 				Value="{Binding Location}" />
-		<Setter Property="InputConnectorTemplate"
-				Value="{StaticResource DefaultInputConnectorTemplate}" />
-		<Setter Property="OutputConnectorTemplate"
-				Value="{StaticResource DefaultOutputConnectorTemplate}" />
 		<!-- Set Defaults -->
 		<Setter Property="Template">
 			<ControlTemplate>
@@ -81,32 +76,12 @@
 
 						<!--Body-->
 						<Grid Grid.Row="1">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
-
-							<!--Data IN-->
-							<ItemsControl ItemsSource="{TemplateBinding Input}"
-										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
-										  ItemTemplate="{TemplateBinding InputConnectorTemplate}"
-										  Focusable="False" />
-
-							<!--Content-->
-							<Border Grid.Column="1"
-									Padding="16 0 16 0"
-									Background="{TemplateBinding ContentBrush}">
-								<ContentPresenter Content="{TemplateBinding Content}"/>
-							</Border>
-
-							<!--Data OUT-->
-							<ItemsControl ItemsSource="{TemplateBinding Output}"
-										  ItemTemplate="{TemplateBinding OutputConnectorTemplate}"
-										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
-										  Grid.Column="2"
-										  Focusable="False" />
-						</Grid>
+						<!--Content-->
+						<Border Padding="0"
+								Background="{TemplateBinding ContentBrush}">
+							<ContentPresenter Content="{TemplateBinding Content}"/>
+						</Border>
+					</Grid>
 
 						<!--Footer-->
 						<Border IsVisible="{TemplateBinding HasFooter}"

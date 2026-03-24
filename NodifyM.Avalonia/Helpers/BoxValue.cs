@@ -21,7 +21,4 @@ public static class BoxValue
     public static readonly uint UInt1 = 1u;
 
     public static readonly Thickness Thickness2 = new Thickness(2);
-    public static readonly Size ArrowSize = new Size(8, 8);
-    public static readonly Size ConnectionOffset = new Size(14, 0);
-    
 }

@@ -5,7 +5,6 @@
         xmlns:controls="clr-namespace:NodifyM.Avalonia.Controls;assembly=NodifyM.Avalonia"
         xmlns:example="clr-namespace:NodifyM.Avalonia.Example"
         xmlns:viewModelBase="clr-namespace:NodifyM.Avalonia.ViewModelBase;assembly=NodifyM.Avalonia"
-        xmlns:converters="clr-namespace:NodifyM.Avalonia.Converters;assembly=NodifyM.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="NodifyM.Avalonia.Example.MainWindow"
         x:DataType="example:MainWindowViewModel"
@@ -22,15 +21,8 @@
                                SelectedItems="{Binding SelectedNodes}"
                                Background="Transparent"
                                ItemsSource="{Binding Nodes }"
-                               Connections="{Binding Connections}"
-                               PendingConnection="{Binding PendingConnection}"
                                Zoom="{Binding #Slider.Value,Mode=TwoWay}"
-                               DisconnectConnectorCommand="{Binding DisconnectConnectorCommand}">
-
-            <controls:NodifyEditor.Resources>
-                <converters:FlowToDirectionConverter x:Key="FlowToDirectionConverter" />
-
-            </controls:NodifyEditor.Resources>
+                               >
             <controls:NodifyEditor.GridLineTemplate>
                 <DataTemplate>
                     <controls:LargeGridLine Width="{Binding $parent[controls:NodifyEditor].Bounds.Width}"
@@ -44,57 +36,6 @@
                                             ZIndex="-2" />
                 </DataTemplate>
             </controls:NodifyEditor.GridLineTemplate>
-            <controls:NodifyEditor.ConnectionTemplate>
-                <DataTemplate DataType="{x:Type viewModelBase:ConnectionViewModelBase}">
-                    <Grid>
-                        <controls:Connection
-                            TextBrush="{StaticResource Connection.TextColorBrush}"
-                            Text="{Binding Text}"
-                            TextPoint="50%,50%"
-                            SplitCommand="{Binding SplitConnectionCommand}"
-                            DisconnectCommand="{Binding DisconnectConnectionCommand}"
-                            Direction="{Binding .,Converter={StaticResource FlowToDirectionConverter}}"
-                            Source="{Binding Source.Anchor}" Focusable="True"
-                            Target="{Binding Target.Anchor}">
-                            <controls:Connection.Stroke>
-                                <SolidColorBrush Color="Red"
-                                                 Opacity="0.5" />
-                            </controls:Connection.Stroke>
-                            <controls:Connection.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="_Delete" />
-                                </ContextMenu>
-                            </controls:Connection.ContextMenu>
-                        </controls:Connection>
-                    </Grid>
-
-                </DataTemplate>
-            </controls:NodifyEditor.ConnectionTemplate>
-            <controls:NodifyEditor.PendingConnectionTemplate>
-                <DataTemplate DataType="{x:Type viewModelBase:PendingConnectionViewModelBase}">
-                    <controls:PendingConnection
-                        StartedCommand="{Binding StartCommand}"
-                        CompletedCommand="{Binding FinishCommand}"
-                        EnablePreview="True"
-                        EnableSnapping="True"
-                        Direction="{Binding Source.Flow,Converter={StaticResource FlowToDirectionConverter}}"
-                        PreviewTarget="{Binding PreviewTarget, Mode=OneWayToSource}">
-                        <controls:PendingConnection.Stroke>
-                            <SolidColorBrush Color="Red"
-                                             Opacity="0.5" />
-
-                        </controls:PendingConnection.Stroke>
-                        <controls:PendingConnection.Background>
-                            <SolidColorBrush Color="DodgerBlue"
-                                             Opacity="0.8" />
-                        </controls:PendingConnection.Background>
-                        <TextBlock Text="{Binding PreviewText}" />
-
-
-                    </controls:PendingConnection>
-
-                </DataTemplate>
-            </controls:NodifyEditor.PendingConnectionTemplate>
             <controls:NodifyEditor.ItemTemplate>
                 <controls:NodeTemplateSelector>
                     <DataTemplate DataType="controls:NodeGroup">
@@ -102,34 +43,11 @@
                                             CanResize="{Binding CanResize}" 
                                             Size="{Binding Size}"></controls:NodeGroup>
                     </DataTemplate>
-                    <DataTemplate DataType="viewModelBase:KnotNodeViewModel">
-                        <controls:KnotNode
-                            Location="{Binding Location,Mode=TwoWay}"
-                            Content="{Binding Connector}">
-                            <controls:KnotNode.ContentTemplate>
-                                <DataTemplate DataType="viewModelBase:ConnectorViewModelBase">
-                                    <controls:Connector
-                                        VerticalAlignment="Center"
-                                        IsConnected="{Binding IsConnected}"
-                                        Anchor="{Binding Anchor, Mode=OneWayToSource}">
-                                        <controls:Connector.BorderBrush>
-                                            <SolidColorBrush
-                                                Color="CornflowerBlue"
-                                                Opacity="0.5" />
-                                        </controls:Connector.BorderBrush>
-                                    </controls:Connector>
-                                </DataTemplate>
-                            </controls:KnotNode.ContentTemplate>
-                        </controls:KnotNode>
-                    </DataTemplate>
                     <DataTemplate DataType="viewModelBase:NodeViewModelBase">
                         <controls:Node x:Name="Node"
                                        IsResize="True"
-                                       Input="{Binding Input}"
-                                       
                                        Location="{Binding Location,Mode=TwoWay}"
-                                       VerticalAlignment="Center"
-                                       Output="{Binding Output}">
+                                       VerticalAlignment="Center">
                             <controls:Node.Styles>
                                 <Style Selector="controls|Node /template/ ContentPresenter#HeaderContentPresenter">
                                     <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
@@ -150,48 +68,6 @@
                                     <Setter Property="BorderBrush" Value="AliceBlue"></Setter>
                                 </Style>
                             </controls:Node.Styles>
-                            <controls:Node.InputConnectorTemplate>
-                                <DataTemplate DataType="{x:Type viewModelBase:ConnectorViewModelBase}">
-                                    <controls:NodeInput
-                                        x:Name="NodeInput"
-                                        VerticalAlignment="Center"
-                                        IsConnected="{Binding IsConnected}"
-                                        Anchor="{Binding Anchor, Mode=OneWayToSource}">
-                                        
-                                        <controls:NodeInput.BorderBrush>
-                                            <SolidColorBrush
-                                                Color="CornflowerBlue"
-                                                Opacity="0.5" />
-                                        </controls:NodeInput.BorderBrush>
-                                    </controls:NodeInput>
-                                </DataTemplate>
-                            </controls:Node.InputConnectorTemplate>
-
-                            <controls:Node.OutputConnectorTemplate>
-                                <DataTemplate DataType="{x:Type viewModelBase:ConnectorViewModelBase}">
-                                    <controls:NodeOutput
-                                        x:Name="NodeOutput"
-                                        VerticalAlignment="Center"
-                                        IsConnected="{Binding IsConnected}"
-                                        Anchor="{Binding Anchor, Mode=OneWayToSource}">
-                                        <controls:NodeOutput.Header>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Left Content" />
-                                                <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding Title}" />
-                                            </Grid>
-                                        </controls:NodeOutput.Header>
-                                        <controls:NodeOutput.BorderBrush>
-                                            <SolidColorBrush
-                                                Color="CornflowerBlue"
-                                                Opacity="0.5" />
-                                        </controls:NodeOutput.BorderBrush>
-                                    </controls:NodeOutput>
-                                </DataTemplate>
-                            </controls:Node.OutputConnectorTemplate>
                         </controls:Node>
                     </DataTemplate>
                 </controls:NodeTemplateSelector>

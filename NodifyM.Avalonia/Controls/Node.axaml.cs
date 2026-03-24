@@ -5,8 +5,6 @@ using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Media;
-using System.Collections;
-
 namespace NodifyM.Avalonia.Controls;
 
 public class Node : BaseNode
@@ -32,8 +30,6 @@ public class Node : BaseNode
     public static readonly AvaloniaProperty<IDataTemplate> HeaderTemplateProperty =
         AvaloniaProperty.Register<Node, IDataTemplate>(nameof(HeaderTemplate));
 
-    public static readonly AvaloniaProperty<IDataTemplate> InputConnectorTemplateProperty =
-        AvaloniaProperty.Register<Node, IDataTemplate>(nameof(InputConnectorTemplate));
 
     protected internal static readonly AvaloniaProperty<bool> HasFooterProperty =
         AvaloniaProperty.RegisterDirect<Node, bool>(nameof(HasFooter), o => o.HasFooter);
@@ -41,14 +37,6 @@ public class Node : BaseNode
     protected internal static readonly AvaloniaProperty<bool> HasHeaderProperty =
         AvaloniaProperty.RegisterDirect<Node, bool>(nameof(HasHeader), o => o.HasHeader);
 
-    public static readonly StyledProperty<IDataTemplate> OutputConnectorTemplateProperty =
-        AvaloniaProperty.Register<Node, IDataTemplate>(nameof(OutputConnectorTemplate));
-
-    public static readonly AvaloniaProperty<IEnumerable> InputProperty =
-        AvaloniaProperty.Register<Node, IEnumerable>(nameof(Input));
-
-    public static readonly AvaloniaProperty<IEnumerable> OutputProperty =
-        AvaloniaProperty.Register<Node, IEnumerable>(nameof(Output));
     public static readonly AvaloniaProperty<bool> IsResizeProperty =
       AvaloniaProperty.Register<Node, bool>(nameof(IsResize),false);
 
@@ -107,41 +95,6 @@ public class Node : BaseNode
         set => SetValue(HeaderTemplateProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets the template used to display the content of the control's <see cref="Input"/> connectors.
-    /// </summary>
-    public IDataTemplate InputConnectorTemplate
-    {
-        get => (DataTemplate)GetValue(InputConnectorTemplateProperty);
-        set => SetValue(InputConnectorTemplateProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets the template used to display the content of the control's <see cref="Output"/> connectors.
-    /// </summary>
-    public IDataTemplate OutputConnectorTemplate
-    {
-        get => (DataTemplate)GetValue(OutputConnectorTemplateProperty);
-        set => SetValue(OutputConnectorTemplateProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets the data for the input <see cref="Connector"/>s of this control.
-    /// </summary>
-    public IEnumerable Input
-    {
-        get => (IEnumerable)GetValue(InputProperty);
-        set => SetValue(InputProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets the data for the output <see cref="Connector"/>s of this control.
-    /// </summary>
-    public IEnumerable Output
-    {
-        get => (IEnumerable)GetValue(OutputProperty);
-        set => SetValue(OutputProperty, value);
-    }
     /// <summary>
     /// Get or sets a value indicating whether the Node can be resized.
     /// </summary>

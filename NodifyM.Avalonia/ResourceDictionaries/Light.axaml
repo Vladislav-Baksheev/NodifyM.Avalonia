@@ -34,40 +34,4 @@
     <Color x:Key="GroupingNode.HeaderColor">#5C6A98</Color>
     <Color x:Key="GroupingNode.BorderColor">Transparent</Color>
 
-    <!--KNOT NODE-->
-    <Color x:Key="KnotNode.BackgroundColor">#CBCCDF</Color>
-    <Color x:Key="KnotNode.ForegroundColor">White</Color>
-    <Color x:Key="KnotNode.BorderColor">Transparent</Color>
-
-    <!--CONNECTOR-->
-    <Color x:Key="Connector.BackgroundColor">#B1C5FF</Color>
-    <Color x:Key="Connector.ForegroundColor">White</Color>
-    <Color x:Key="Connector.BorderColor">#7EB4EA</Color>
-
-    <!--NODE INPUT-->
-    <Color x:Key="NodeInput.BackgroundColor">Transparent</Color>
-    <Color x:Key="NodeInput.ForegroundColor">Black</Color>
-    <Color x:Key="NodeInput.BorderColor">#4B91B8</Color>
-
-    <!--NODE OUTPUT-->
-    <Color x:Key="NodeOutput.BackgroundColor">Transparent</Color>
-    <Color x:Key="NodeOutput.ForegroundColor">Black</Color>
-    <Color x:Key="NodeOutput.BorderColor">#4B91B8</Color>
-
-    <!--CONNECTION-->
-    <Color x:Key="Connection.StrokeColor">#5CA2C9</Color>
-    <Color x:Key="Connection.TextColor">Black</Color>
-
-    <!--LINE CONNECTION-->
-    <Color x:Key="LineConnection.StrokeColor">#5CA2C9</Color>
-
-    <!--CIRCUIT CONNECTION-->
-    <Color x:Key="CircuitConnection.StrokeColor">#5CA2C9</Color>
-
-    <!--PENDING CONNECTION-->
-    <Color x:Key="PendingConnection.StrokeColor">#5CA2C9</Color>
-    <Color x:Key="PendingConnection.BorderColor">Black</Color>
-    <Color x:Key="PendingConnection.ForegroundColor">White</Color>
-    <Color x:Key="PendingConnection.BackgroundColor">#5C6A98</Color>
-
 </ResourceDictionary>
